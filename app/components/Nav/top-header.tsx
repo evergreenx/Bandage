@@ -20,17 +20,18 @@ export default function TopHeader() {
         height: "58px",
         display: "flex",
         alignItems: "center",
+        color: '#fff',
+        justifyContent : 'center',
+        px : '24px',
+        mx : 'auto'
       }}
     >
-      <Container
-        sx={{
-          color: "#fff",
-        }}
-      >
+      
         <Box
           sx={{
             display: "flex",
-            justifyContent: "space-between",
+            // justifyContent: "space-between",
+            alignItems:'center'
           }}
         >
           {/* phone */}
@@ -38,13 +39,14 @@ export default function TopHeader() {
             sx={{
               display: "flex",
               alignItems: "center",
+              mr : '30px'
             }}
           >
             <Image src={phoneIcon} alt="phone icon" />
             <Typography
               sx={{
                 fontSize: "12px",
-                fontWeight: "400",
+                fontWeight: "700",
                 ml: "5px",
               }}
             >
@@ -58,13 +60,14 @@ export default function TopHeader() {
             sx={{
               display: "flex",
               alignItems: "center",
+              mr : '225px'
             }}
           >
             <Image src={MailIcon} alt="phone icon" />
             <Typography
               sx={{
                 fontSize: "12px",
-                fontWeight: "400",
+                fontWeight: "700",
                 ml: "5px",
               }}
             >
@@ -84,7 +87,7 @@ export default function TopHeader() {
               sx={{
                 fontWeight: "700",
                 fontSize: "14px",
-                mr: "50px",
+                mr: "225px",
               }}
             >
               Follow Us and get a chance to win 80% off
@@ -153,7 +156,6 @@ export default function TopHeader() {
             </Box>
           </Box>
         </Box>
-      </Container>
-    </Box>
+       </Box>
   );
 }

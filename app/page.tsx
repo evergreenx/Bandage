@@ -15,8 +15,7 @@ export default function IndexPage() {
       <Container>
         <Typography></Typography>
 
-        <Button variant="contained">Hello world</Button>
-
+        
         <BestSellerProducts />
       </Container>
 

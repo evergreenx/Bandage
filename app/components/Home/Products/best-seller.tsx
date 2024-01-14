@@ -3,13 +3,8 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 
 export default function BestSellerProducts() {
+  const { data, error, isLoading } = useGetProductsQuery();
 
-  const { data, error, isLoading } = useGetProductsQuery()
-
-  if (isLoading) {
-
-      return 'loading'
-  }
   return (
     <Box
       sx={{
@@ -53,19 +48,22 @@ export default function BestSellerProducts() {
 
       {/* products */}
 
-      {
-        data.products.map((i)=>{ 
+      {isLoading && "loading data"}
 
+      <Box>
+        {data &&
+          data?.products.map((i: any) => {
+            return (
+              <>
+                <Typography>{i.title}</Typography>;
+                <Typography>{i.brand}</Typography>;
+                <Typography>{i.description}</Typography>;
+              </>
+            );
+          })}
+      </Box>
 
-
-          <h1>
-
-
-{i.title}
-
-            </h1>
-        }) 
-      }
+      <Typography></Typography>
     </Box>
   );
 }

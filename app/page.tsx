@@ -1,24 +1,26 @@
-/* Components */
-import { Typography } from "@mui/material";
+"use client";
+import { Container, Typography } from "@mui/material";
 import { Counter } from "./components/Counter/Counter";
 
 import Button from "@mui/material/Button";
+import FooterCta from "./components/Home/footer-cta";
+import { Grid, Paper } from "@mui/material";
+import BestSellerProducts from "./components/Home/Products/best-seller";
+import { useGetProductsQuery } from "@/services/products";
 
 export default function IndexPage() {
+
   return (
     <>
-      <Typography>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus quos
-        numquam voluptates ipsa et repellendus doloribus odit. Ab quibusdam
-        voluptates aut perspiciatis minus alias in explicabo consectetur.
-        Impedit, a nesciunt!
-      </Typography>
+      <Container>
+        <Typography></Typography>
 
-      <Button variant="contained">Hello world</Button>
+        <Button variant="contained">Hello world</Button>
+
+        <BestSellerProducts />
+      </Container>
+
+      <FooterCta />
     </>
   );
 }
-
-export const metadata = {
-  title: "Bandage store || Home",
-};

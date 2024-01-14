@@ -8,6 +8,7 @@ import "@fontsource-variable/montserrat";
 import "./styles/globals.css";
 import TopHeader from "./components/Nav/top-header";
 import Header from "./components/Nav/header";
+import Footer from "./components/Footer/footer";
 
 export default function RootLayout(props: React.PropsWithChildren) {
   return (
@@ -19,6 +20,8 @@ export default function RootLayout(props: React.PropsWithChildren) {
               <TopHeader />
               <Header />
               {props.children}
+
+              <Footer />
             </main>
           </AppRouterCacheProvider>
         </body>

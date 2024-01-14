@@ -13,6 +13,15 @@ export { default as Logo } from "./svg/logo.svg";
 
 export { default as SearchIcon } from "./svg/search.svg";
 
-export { default as WishtlistIcon} from './svg/wishlist.svg'
+export { default as WishtlistIcon } from "./svg/wishlist.svg";
 
 export { default as avatarIcon } from "./svg/avatar.svg";
+
+export { default as TwitterBlueIcon } from "./svg/twblue.svg";
+
+export { default as InstagramBlueIcon } from "./svg/igbluesvg.svg";
+
+export { default as FacebookBlueIcon } from "./svg/fbblue.svg";
+
+export { default as FooterBg } from "./footerbg.png";
+

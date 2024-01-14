@@ -57,7 +57,7 @@ export default function Header() {
             <Typography
               sx={{
                 fontSize: "14px",
-                color: "#737373",
+                color : "primary.main",
                 fontWeight: 700,
                 cursor: "pointer",
                 mr: "15px",
@@ -69,7 +69,7 @@ export default function Header() {
             <Typography
               sx={{
                 fontSize: "14px",
-                color: "#737373",
+                color : "primary.main",
                 fontWeight: 700,
                 cursor: "pointer",
                 mr: "15px",
@@ -81,7 +81,7 @@ export default function Header() {
             <Typography
               sx={{
                 fontSize: "14px",
-                color: "#737373",
+                color : "primary.main",
                 fontWeight: 700,
                 cursor: "pointer",
                 mr: "15px",
@@ -93,7 +93,7 @@ export default function Header() {
             <Typography
               sx={{
                 fontSize: "14px",
-                color: "#737373",
+                color : "primary.main",
                 fontWeight: 700,
                 cursor: "pointer",
                 mr: "15px",
@@ -105,7 +105,7 @@ export default function Header() {
             <Typography
               sx={{
                 fontSize: "14px",
-                color: "#737373",
+                color : "primary.main",
                 fontWeight: 700,
                 cursor: "pointer",
                 mr: "15px",
@@ -117,7 +117,7 @@ export default function Header() {
             <Typography
               sx={{
                 fontSize: "14px",
-                color: "#737373",
+                color : "primary.main",
                 fontWeight: 700,
                 cursor: "pointer",
                 mr: "15px",

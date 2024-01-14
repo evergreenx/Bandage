@@ -1,6 +1,8 @@
 import { useGetProductsQuery } from "@/services/products";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
+import ProductsCard from "./products-card";
+import { Product, ProductInterface } from "@/types";
 
 export default function BestSellerProducts() {
   const { data, error, isLoading } = useGetProductsQuery();
@@ -50,18 +52,12 @@ export default function BestSellerProducts() {
 
       {isLoading && "loading data"}
 
-      <Box>
+      <Grid>
         {data &&
-          data?.products.map((i: any) => {
-            return (
-              <>
-                <Typography>{i.title}</Typography>;
-                <Typography>{i.brand}</Typography>;
-                <Typography>{i.description}</Typography>;
-              </>
-            );
+          data?.products.map((product:Product) => {
+            return <ProductsCard data={product} key={product.id} />;
           })}
-      </Box>
+      </Grid>
 
       <Typography></Typography>
     </Box>

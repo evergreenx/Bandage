@@ -1,12 +1,29 @@
 import { useGetProductsQuery } from "@/services/products";
-import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import React, { useState } from "react";
 import ProductsCard from "./products-card";
 import { Product, ProductInterface } from "@/types";
 
-export default function BestSellerProducts() {
-  const { data, error, isLoading } = useGetProductsQuery();
+import CircularProgress from "@mui/material/CircularProgress";
 
+export default function BestSellerProducts() {
+  const [skip, setSkip] = useState(0);
+  const limit = 10;
+  const { data, error, isLoading, isFetching } = useGetProductsQuery({
+    limit,
+    skip,
+  });
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+
+  const handleLoadMore = () => {
+    setSkip((prevSkip) => prevSkip + limit);
+  };
+
+  React.useEffect(() => {
+    if (data?.products) {
+      setAllProducts((prevProducts) => [...prevProducts, ...data.products]);
+    }
+  }, [data]);
   return (
     <Box
       sx={{
@@ -43,6 +60,7 @@ export default function BestSellerProducts() {
           fontSize: "14px",
           fontWeight: 400,
           textAlign: "center",
+          mb: "32px",
         }}
       >
         Problems trying to resolve the conflict between
@@ -50,14 +68,65 @@ export default function BestSellerProducts() {
 
       {/* products */}
 
-      {isLoading && "loading data"}
+      {isLoading && (
+        <Stack
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress color="primary" />
+        </Stack>
+      )}
 
-      <Grid>
+      <Grid
+        container
+        sx={{
+          p: "24px",
+        }}
+        spacing={"30px"}
+      >
         {data &&
-          data?.products.map((product:Product) => {
-            return <ProductsCard data={product} key={product.id} />;
+          allProducts.map((product: Product) => {
+            return (
+              <Grid
+                item
+                md={12 / 5}
+                sx={{
+                  mb: "15px",
+                }}
+                xs={12}
+              >
+                <ProductsCard data={product} key={product.id} />
+              </Grid>
+            );
           })}
       </Grid>
+
+      {data && data?.products.length > 0 && !isFetching && (
+        <Button
+          disabled={isFetching}
+          onClick={handleLoadMore}
+          sx={{
+            borderRadius: "5px",
+            px: "40px",
+            py: " 15px",
+            fontSize: "14px",
+            color: "#23A6F0",
+            fontWeight: 700,
+            border: "1px solid #23A6F0",
+            textTransform: "uppercase",
+            mt: "24px",
+            mx: "auto",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          load more products
+        </Button>
+      )}
 
       <Typography></Typography>
     </Box>

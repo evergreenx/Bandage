@@ -9,11 +9,11 @@ export const productsApi = createApi({
       query: ({ limit = 10, skip = 0 }) => `products?limit=${limit}&skip=${skip}`,
     }),
 
-    getSingleProducts: build.query<ProductInterface, { id: number }>({
+    getSingleProducts: build.query<ProductInterface, { id : string | string[]}>({
         query: ({id }) => `products/${id}`,
       }),
   }),
 });
 
 // Export hooks for usage in functional components
-export const { useGetProductsQuery } = productsApi;
+export const { useGetProductsQuery , useGetSingleProductsQuery } = productsApi;

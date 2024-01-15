@@ -25,3 +25,11 @@ export { default as FacebookBlueIcon } from "./svg/fbblue.svg";
 
 export { default as FooterBg } from "./footerbg.png";
 
+export { default as AWSLogo } from "./svg/aws.svg";
+export { default as HolliLogo } from "./svg/hooli.svg";
+
+export { default as StripeLogo } from "./svg/stripe.svg";
+
+export { default as PiedPiperLogo } from "./svg/piedpiper.svg";
+export { default as RedditLogo } from "./svg/reddit.svg";
+export { default as LyftLogo } from "./svg/lyft.svg";

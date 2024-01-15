@@ -5,23 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function ProductsCard({ data }: { data: Product }) {
+export default function BestSellerCard({ data }: { data: Product }) {
   return (
     <Link
-     href={`/${data.id}`}
-     
-     
-     style={{
-      textDecoration : 'none'
-     }}
-     >
+      style={{
+        textDecoration: "none",
+      }}
+      href={`/${data.id}`}
+    >
       <Box
         sx={{
-          width: "183px",
-          height: "400px",
+          width: "239px",
+          height: "442px",
         }}
       >
-        <Image src={data.thumbnail} alt="prodct" width={183} height={238} />
+        <Image src={data.thumbnail} alt="prodct" width={239} height={238} />
 
         <Box
           sx={{
@@ -35,14 +33,14 @@ export default function ProductsCard({ data }: { data: Product }) {
               color: "primary.dark",
               fontsize: "16px",
               fontWeight: 700,
-              textAlign: "center",
+
               overflow: "hidden",
               textOverflow: "ellipsis",
               display: "-webkit-box",
               WebkitLineClamp: "2",
               WebkitBoxOrient: "vertical",
               textTransform: "capitalize",
-              width: "131px",
+
               lineClamp: 1,
             }}
           >
@@ -55,7 +53,7 @@ export default function ProductsCard({ data }: { data: Product }) {
               textTransform: "capitalize",
               fontsize: "14px",
               fontWeight: 700,
-              textAlign: "center",
+
               mt: "10px",
             }}
           >
@@ -65,7 +63,7 @@ export default function ProductsCard({ data }: { data: Product }) {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "center",
+
               mt: "10px",
             }}
           >
@@ -75,7 +73,6 @@ export default function ProductsCard({ data }: { data: Product }) {
                 fontSize: "16px",
                 fontWeight: 700,
                 color: "#BDBDBD",
-                textAlign: "center",
               }}
             >
               ${data.price}
@@ -87,7 +84,6 @@ export default function ProductsCard({ data }: { data: Product }) {
                 fontSize: "16px",
                 fontWeight: 700,
                 color: "#23856D",
-                textAlign: "center",
               }}
             >
               ${data.discountPercentage}

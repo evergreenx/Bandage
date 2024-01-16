@@ -50,8 +50,14 @@ export default function Header() {
 
           <Box
             sx={{
-              display: "flex",
-              ml  : '119px'
+       
+              ml  : '119px',
+              display: {
+
+                xs: 'none', lg: 'flex', xl: 'flex' 
+  
+              },
+       
             }}
           >
             <Typography
@@ -130,7 +136,13 @@ export default function Header() {
 
         <Box
           sx={{
-            display: "flex",
+            display: {
+
+              xs: 'none', lg: 'block', xl: 'block' 
+
+            },
+     
+
             alignItems: "center",
           }}
         >

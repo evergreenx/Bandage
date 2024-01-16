@@ -17,7 +17,13 @@ export default function ProductsCard({ data }: { data: Product }) {
      >
       <Box
         sx={{
-          width: "183px",
+       
+
+          width : {
+
+                
+            xs: '100%', lg: '183px', xl: '183px' 
+            },
           height: "400px",
         }}
       >

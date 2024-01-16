@@ -1,4 +1,4 @@
-import { ProductInterface } from '@/types';
+import { Product, ProductInterface } from '@/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const productsApi = createApi({
@@ -9,7 +9,7 @@ export const productsApi = createApi({
       query: ({ limit = 10, skip = 0 }) => `products?limit=${limit}&skip=${skip}`,
     }),
 
-    getSingleProducts: build.query<ProductInterface, { id : string | string[]}>({
+    getSingleProducts: build.query<Product, { id : string | string[]}>({
         query: ({id }) => `products/${id}`,
       }),
   }),

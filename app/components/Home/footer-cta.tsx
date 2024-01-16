@@ -12,7 +12,7 @@ export default function FooterCta() {
     <Box
       sx={{
         height: "640px",
-        bgcolor: "yellow",
+
         backgroundImage: `url(${FooterBg.src})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
@@ -24,7 +24,12 @@ export default function FooterCta() {
     >
       <Box
         sx={{
-          width: "571px",
+          width: {
+
+
+            lg: "571px" , 
+            sm : '100%'
+          } ,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -38,7 +43,7 @@ export default function FooterCta() {
             fontsize: "14px",
             color: "#23A6F0",
             mb: "30px",
-            fontWeight: 400,
+            fontWeight: 700,
           }}
         >
           Designing Better Experience

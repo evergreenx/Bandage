@@ -17,6 +17,7 @@ import BestSellerCard from "../components/ProductDetails/best-seller-card";
 import BestSellerProducts from "../components/Home/Products/best-seller";
 import { Product } from "@/types";
 import SponsorContain from "../components/ProductDetails/sponsor-contain";
+import ProductInfo from "../components/ProductDetails/product-info";
 
 export default function page() {
   const { id } = useParams();
@@ -32,73 +33,82 @@ export default function page() {
   } = useGetProductsQuery({ limit: 8 });
 
   return (
-    <Container>
-      {id}
+    <>
+      <Box
+        sx={{
+          bgcolor: "#FAFAFA",
+          pb: "48px",
+        }}
+      >
+        <Container>{data && <ProductInfo product={data} />}</Container>
+      </Box>
+      <Container>
+        <Typography>{JSON.stringify(data)}</Typography>
 
-      <Typography>{JSON.stringify(data)}</Typography>
-
-      {isLoading && (
-        <Stack
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <CircularProgress color="primary" />
-        </Stack>
-      )}
-<Typography
+        {isLoading && (
+          <Stack
             sx={{
-              color: "primary.dark",
-              fontSize: "24px",
-              fontWeight: 700,
-              mb: '50px',
-              mt: '48px'
-         
-           
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-        BESTSELLER PRODUCTS
-      </Typography>
+            <CircularProgress color="primary" />
+          </Stack>
+        )}
 
-      {bestsellerIsLoading && (
-        <Stack
+        {/* product details */}
+
+        <Typography
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            color: "primary.dark",
+            fontSize: "24px",
+            fontWeight: 700,
+            mb: "50px",
+            mt: "48px",
           }}
         >
-          <CircularProgress color="primary" />
-        </Stack>
-      )}
+          BESTSELLER PRODUCTS
+        </Typography>
 
-      <Grid
-        container
-        sx={{
-          py: "48",
-        }}
-        spacing={"30px"}
-      >
-        {bestsellerData &&
-          bestsellerData?.products.map((product: Product) => {
-            return (
-              <Grid
-                item
-                md={3}
-                sx={{
-                  mb: "15px",
-                }}
-                xs={12}
-              >
-                <BestSellerCard data={product} key={product.id} />
-              </Grid>
-            );
-          })}
-      </Grid>
+        {bestsellerIsLoading && (
+          <Stack
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <CircularProgress color="primary" />
+          </Stack>
+        )}
 
-      <SponsorContain />
-    </Container>
+        <Grid
+          container
+          sx={{
+            py: "48",
+          }}
+          spacing={"30px"}
+        >
+          {bestsellerData &&
+            bestsellerData?.products.map((product: Product) => {
+              return (
+                <Grid
+                  item
+                  md={3}
+                  sx={{
+                    mb: "15px",
+                  }}
+                  xs={12}
+                >
+                  <BestSellerCard data={product} key={product.id} />
+                </Grid>
+              );
+            })}
+        </Grid>
+
+        <SponsorContain />
+      </Container>
+    </>
   );
 }

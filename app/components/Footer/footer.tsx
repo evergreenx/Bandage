@@ -1,5 +1,10 @@
 "use client";
-import { FacebookBlueIcon, InstagramBlueIcon, Logo, TwitterBlueIcon } from "@/app/assets";
+import {
+  FacebookBlueIcon,
+  InstagramBlueIcon,
+  Logo,
+  TwitterBlueIcon,
+} from "@/app/assets";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
@@ -31,24 +36,39 @@ export default function Footer() {
         }}
       >
         <Container
-        
-        sx={{
-            display :' flex',
-            justifyContent :'space-between',
-            alignItems : 'center'
-        }}
+          sx={{
+            display: "flex",
+
+
+            flexDirection: {
+
+              xs: 'column', lg: 'row', xl: 'row' 
+
+            },
+     
+            justifyContent: "space-between",
+            alignItems: {
+
+
+              
+              xs: 'left', lg: 'center', xl: 'center' 
+            }
+          }}
         >
           <Image src={Logo} alt="logo" />
 
           <Box
             sx={{
               display: "flex",
-              alignItems : 'center'
+              alignItems: "center",
+
+              mt: {
+                
+              xs: '11px', lg: '0', xl: '0' 
+              }
             }}
           >
-            <Box
-          
-            >
+            <Box>
               <Image src={FacebookBlueIcon} alt="facebook icon" />
             </Box>
 
@@ -73,6 +93,11 @@ export default function Footer() {
       <Container>
         <Box
           sx={{
+            flexDirection: {
+              xs: "column",
+              lg: "row",
+            },
+
             display: "flex",
             justifyContent: "space-between",
             pt: "50px",
@@ -82,6 +107,11 @@ export default function Footer() {
             sx={{
               width: "148px",
               mr: "30px",
+              mb : {
+
+                
+              xs: '30px', lg: '0', xl: '0' 
+              }
             }}
           >
             <Typography
@@ -115,6 +145,11 @@ export default function Footer() {
             sx={{
               width: "148px",
               mr: "30px",
+              mb : {
+
+                
+                xs: '30px', lg: '0', xl: '0' 
+                }
             }}
           >
             <Typography
@@ -148,6 +183,11 @@ export default function Footer() {
             sx={{
               width: "148px",
               mr: "30px",
+              mb : {
+
+                
+                xs: '30px', lg: '0', xl: '0' 
+                }
             }}
           >
             <Typography
@@ -283,10 +323,10 @@ export default function Footer() {
                   fontWeight: 400,
                   textTransform: "capitalize",
                   color: "#fff",
-                  
-            ":hover": {
-                bgcolor: "#23A6F0",
-              },
+
+                  ":hover": {
+                    bgcolor: "#23A6F0",
+                  },
                 }}
               >
                 Subscribe
@@ -311,11 +351,26 @@ export default function Footer() {
         <Typography
           sx={{
             fontSize: "14px",
-            mt: "77px",
+          textAlign : {
 
+            xs: 'center' , lg: 'left'
+
+          } , 
+            mt: "77px",
+            mx : {
+
+              xs: 'auto'  , lg: '0' , 
+              xl: '0'
+            },
+            width : {
+
+                
+              xs: '313px', lg: '100%', xl: '100%' 
+              },
             fontWeight: 700,
 
             color: "primary.main",
+            
           }}
         >
           Made With Love By Finland All Right Reserved

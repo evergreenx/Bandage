@@ -18,7 +18,13 @@ export default function TopHeader() {
       sx={{
         bgcolor: "#23856D",
         height: "58px",
-        display: "flex",
+
+        display: {
+
+          xs: 'none', lg: 'flex', xl: 'flex' 
+
+        },
+ 
         alignItems: "center",
         color: '#fff',
         justifyContent : 'center',

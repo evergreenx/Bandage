@@ -204,6 +204,9 @@ export default function ProductInfo({ product }: { product: Product }) {
       <Box>
         <Image
           src={product.thumbnail}
+
+          objectFit="cover"
+     
           alt="thumbnail"
           className="w-[506px]"
           width={506}

@@ -27,11 +27,12 @@ export default function Header() {
   const selectWishList = useSelector(selectWishListCount);
 
   const selectCartList = useSelector(selectedCart);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<null>(null);
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
 
-  const handleClick = (event) => {
+  const handleClick = (event:any) => {
+  
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 

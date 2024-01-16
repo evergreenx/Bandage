@@ -10,7 +10,6 @@ import {
   type TypedUseSelectorHook,
 } from "react-redux";
 
-
 import { reducer } from "./rootReducer";
 import { middleware } from "./middleware";
 import { productsApi } from "@/services/products";

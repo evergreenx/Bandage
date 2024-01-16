@@ -43,7 +43,7 @@ export default function page() {
         <Container>{data && <ProductInfo product={data} />}</Container>
       </Box>
       <Container>
-        <Typography>{JSON.stringify(data)}</Typography>
+  
 
         {isLoading && (
           <Stack

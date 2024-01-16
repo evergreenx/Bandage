@@ -12,13 +12,26 @@ import {
   avatarIcon,
   phoneIcon,
 } from "@/app/assets";
+import { ReduxState } from "@/lib/redux";
+import { selectWishListCount } from "@/lib/redux/slices/wishlistSlice/selector";
+
+
 import { Instagram } from "@mui/icons-material";
 import { Box, Container, Link, Typography } from "@mui/material";
 import Image from "next/image";
 
 import React from "react";
+import { useSelector } from "react-redux";
+
 
 export default function Header() {
+
+ const selectWishList = useSelector(selectWishListCount)
+
+ 
+
+
+
   return (
     <Box
       sx={{
@@ -239,7 +252,7 @@ export default function Header() {
                   ml: "5px",
                 }}
               >
-                1
+                {selectWishList.length}
               </Typography>
             </Box>
           </Box>

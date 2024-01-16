@@ -138,7 +138,7 @@ export default function Header() {
           sx={{
             display: {
 
-              xs: 'none', lg: 'block', xl: 'block' 
+              xs: 'none', lg: 'flex', xl: 'flex' 
 
             },
      

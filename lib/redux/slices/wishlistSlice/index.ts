@@ -22,10 +22,10 @@ export const wishlistSlice = createSlice({
           state.items.push(action.payload);
         }
       },
-    // removeFromWishlist: (state, action: PayloadAction<number>) => {
-    //   state.items = state.items.filter((id) => id !== action.payload);
-    // },
+    removeFromWishlist: (state, action: PayloadAction<number>) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
-export const { addToWishlist } = wishlistSlice.actions;
+export const { addToWishlist , removeFromWishlist } = wishlistSlice.actions;

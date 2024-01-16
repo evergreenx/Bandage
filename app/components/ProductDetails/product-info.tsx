@@ -1,4 +1,5 @@
 import { addToWishlist, useSelector } from "@/lib/redux";
+import { addToCart } from "@/lib/redux/slices/cartSlice";
 import { selectWishListCount } from "@/lib/redux/slices/wishlistSlice/selector";
 import { Product, ProductInterface } from "@/types";
 import {
@@ -15,7 +16,9 @@ import { useDispatch } from "react-redux";
 
 export default function ProductInfo({ product }: { product: Product }) {
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false);
+  const [openWishlistSnack, setOpenWishlistSnack] = React.useState(false);
+  const [openCartSnack, setOpenCartSnack] = React.useState(false);
+
 
   const wishlistItems = useSelector(selectWishListCount);
 
@@ -26,16 +29,13 @@ export default function ProductInfo({ product }: { product: Product }) {
   const handleAddToWishlist = (product: any) => {
     if (!isProductInWishlist) {
       dispatch(addToWishlist(product));
-      setOpen(true);
+      setOpenWishlistSnack(true);
     }
   };
 
-  const handleClose = (reason: any) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
+  const handleAddToCart = (product: any) => {
+    dispatch(addToCart(product));
+    setOpenCartSnack(true);
   };
 
   const WishListMessage = () => {
@@ -55,38 +55,8 @@ export default function ProductInfo({ product }: { product: Product }) {
               fontSize: "14px",
             }}
           >
-            Successfully added to basket
+            Successfully added to wishlist
           </Typography>
-
-          <Box
-            sx={{
-              cursor: "pointer",
-            }}
-            onClick={(event) => handleClose(event)}
-          >
-            <svg
-              width="25"
-              height="25"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M23 9L9 23"
-                stroke="#fff"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M9 9L23 23"
-                stroke="#fff"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </Box>
         </Box>
 
         <Box
@@ -132,6 +102,69 @@ export default function ProductInfo({ product }: { product: Product }) {
     );
   };
 
+  const CartListMessage = () => {
+    return (
+      <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+
+            width: "100%",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "14px",
+            }}
+          >
+            Successfully added to basket
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            mt: "24px",
+          }}
+        >
+          <Image
+            src={product.thumbnail}
+            alt="thumbnail "
+            width={64}
+            height={64}
+          />
+
+          <Box
+            sx={{
+              ml: "8px",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: "14px",
+                fontWeight: 500,
+              }}
+            >
+              {product.title}
+            </Typography>
+
+            <Typography
+              sx={{
+                fontSize: "16px",
+                fontWeight: 500,
+                mt: "16px",
+              }}
+            >
+              ${product.price}
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+    );
+  };
   return (
     <Box
       sx={{
@@ -146,19 +179,27 @@ export default function ProductInfo({ product }: { product: Product }) {
     >
       {/* wishlist snackbar */}
       <Snackbar
-        sx={{
-          ".MuiSnackbar-root": {
-            width: "300px",
-            bgcolor: "blue !important",
-          },
-        }}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "right",
         }}
-        open={open}
-        autoHideDuration={600}
+        onClose={() => setOpenWishlistSnack(false)}
+        open={openWishlistSnack}
+        autoHideDuration={4000}
         message={WishListMessage()}
+      ></Snackbar>
+
+      {/* cart snackbar */}
+
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        onClose={() => setOpenCartSnack(false)}
+        open={openCartSnack}
+        autoHideDuration={4000}
+        message={CartListMessage()}
       ></Snackbar>
       <Box>
         <Image
@@ -349,6 +390,7 @@ export default function ProductInfo({ product }: { product: Product }) {
           </Box>
 
           <Box
+            onClick={() => handleAddToCart(product)}
             sx={{
               height: "40px",
               width: "40px",

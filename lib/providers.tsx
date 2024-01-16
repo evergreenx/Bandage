@@ -23,6 +23,7 @@ export const Providers = (props: React.PropsWithChildren) => {
   return (
     <Provider store={reduxStore}>
       {/* mui provider */}
+      
       <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
     </Provider>
   );

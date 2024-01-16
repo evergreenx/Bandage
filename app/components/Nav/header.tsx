@@ -12,150 +12,119 @@ import {
   avatarIcon,
   phoneIcon,
 } from "@/app/assets";
-import { ReduxState } from "@/lib/redux";
+import { ReduxState, removeFromWishlist } from "@/lib/redux";
+import { selectedCart } from "@/lib/redux/slices/cartSlice/selector";
 import { selectWishListCount } from "@/lib/redux/slices/wishlistSlice/selector";
 
-
 import { Instagram } from "@mui/icons-material";
-import { Box, Container, Link, Typography } from "@mui/material";
+import { Box, Container, Link, Popper, Typography } from "@mui/material";
 import Image from "next/image";
 
 import React from "react";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Header() {
+  const selectWishList = useSelector(selectWishListCount);
 
- const selectWishList = useSelector(selectWishListCount)
+  const selectCartList = useSelector(selectedCart);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popper" : undefined;
 
- 
+  const handleClick = (event) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+
+  const dispatch = useDispatch();
 
 
+  // wishpopup
+  function WishlistPopup({ open }: { open: boolean }) {
+    return (
+      <Popper id={id} open={open} anchorEl={anchorEl}>
+        <Box
+          sx={{
+            p: 3,
+            bgcolor: "background.paper",
+            boxShadow: 3,
+            height: "500px",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "16px",
+              fontWeight: 600,
+              my: "1px",
+              mb: '15px'
+            }}
+          >
+            My wishlist
+          </Typography>
+
+          {selectWishList.length === 0 && (
+            <Typography>No product , try adding</Typography>
+          )}
+          {selectWishList.map((i) => {
+            return (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  src={i.thumbnail}
+                  alt="product"
+                  width={100}
+                  height={50}
+                />
+
+                <Typography
+                  sx={{
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    ml: "8px",
+                  }}
+                >
+                  {i.title.slice(0,10)}.....
+                </Typography>
+
+                <Box
+                  sx={{
+                    ml: "10px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => dispatch(removeFromWishlist(i.id))}
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 24 24">
+<path d="M 10 2 L 9 3 L 3 3 L 3 5 L 4.109375 5 L 5.8925781 20.255859 L 5.8925781 20.263672 C 6.023602 21.250335 6.8803207 22 7.875 22 L 16.123047 22 C 17.117726 22 17.974445 21.250322 18.105469 20.263672 L 18.107422 20.255859 L 19.890625 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 6.125 5 L 17.875 5 L 16.123047 20 L 7.875 20 L 6.125 5 z"></path>
+</svg>
+                </Box>
+              </Box>
+            );
+          })}
+        </Box>
+      </Popper>
+    );
+  }
 
   return (
-    <Box
-      sx={{
-        bgcolor: "#fff",
-        height: "138px",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <Container
-        sx={{
-          display: "flex",
+    <>
+      <WishlistPopup open={open} />
 
-          justifyContent: "space-between",
+      <Box
+        sx={{
+          bgcolor: "#fff",
+          height: "138px",
+          display: "flex",
           alignItems: "center",
         }}
       >
-        <Box
+        <Container
           sx={{
             display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Box>
-            <Link href={"/"}>
-              <Image src={Logo} alt="bandage logo" />
-            </Link>
-          </Box>
 
-          <Box
-            sx={{
-       
-              ml  : '119px',
-              display: {
-
-                xs: 'none', lg: 'flex', xl: 'flex' 
-  
-              },
-       
-            }}
-          >
-            <Typography
-              sx={{
-                fontSize: "14px",
-                color : "primary.main",
-                fontWeight: 700,
-                cursor: "pointer",
-                mr: "15px",
-              }}
-            >
-              Home
-            </Typography>
-
-            <Typography
-              sx={{
-                fontSize: "14px",
-                color : "primary.main",
-                fontWeight: 700,
-                cursor: "pointer",
-                mr: "15px",
-              }}
-            >
-              Shop
-            </Typography>
-
-            <Typography
-              sx={{
-                fontSize: "14px",
-                color : "primary.main",
-                fontWeight: 700,
-                cursor: "pointer",
-                mr: "15px",
-              }}
-            >
-              About
-            </Typography>
-
-            <Typography
-              sx={{
-                fontSize: "14px",
-                color : "primary.main",
-                fontWeight: 700,
-                cursor: "pointer",
-                mr: "15px",
-              }}
-            >
-              Blog
-            </Typography>
-
-            <Typography
-              sx={{
-                fontSize: "14px",
-                color : "primary.main",
-                fontWeight: 700,
-                cursor: "pointer",
-                mr: "15px",
-              }}
-            >
-              Contact
-            </Typography>
-
-            <Typography
-              sx={{
-                fontSize: "14px",
-                color : "primary.main",
-                fontWeight: 700,
-                cursor: "pointer",
-                mr: "15px",
-              }}
-            >
-              Pages
-            </Typography>
-          </Box>
-        </Box>
-
-        <Box
-          sx={{
-            display: {
-
-              xs: 'none', lg: 'flex', xl: 'flex' 
-
-            },
-     
-
+            justifyContent: "space-between",
             alignItems: "center",
           }}
         >
@@ -163,76 +132,151 @@ export default function Header() {
             sx={{
               display: "flex",
               alignItems: "center",
-              mr: "30px",
             }}
           >
-            <Image src={avatarIcon} alt="avatar" />
-
-            <Typography
-              sx={{
-                textDecoration: "none",
-                color: "#23A6F0",
-                fontWeight: 700,
-                fontSize: "14px",
-                ml: "5px",
-                cursor: "pointer",
-              }}
-            >
-              Login
-            </Typography>
-            <Typography
-              sx={{
-                textDecoration: "none",
-                color: "#23A6F0",
-                fontWeight: 700,
-                fontSize: "14px",
-              }}
-            >
-              /
-            </Typography>
-
-            <Typography
-              sx={{
-                textDecoration: "none",
-                color: "#23A6F0",
-                fontWeight: 700,
-                fontSize: "14px",
-                cursor: "pointer",
-              }}
-            >
-              Register
-            </Typography>
-          </Box>
-
-          <Box display={"flex"} alignItems={"center"}>
-            <Box
-              sx={{
-                mr: "30px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Image src={SearchIcon} alt="searh icon" />
+            <Box>
+              <Link href={"/"}>
+                <Image src={Logo} alt="bandage logo" />
+              </Link>
             </Box>
 
             <Box
               sx={{
-                mr: "30px",
-                display: "flex",
-                alignItems: "center",
+                ml: "119px",
+                display: {
+                  xs: "none",
+                  lg: "flex",
+                  xl: "flex",
+                },
               }}
             >
-              <Image src={StoreIcon} alt="searh icon" />
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  color: "primary.main",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  mr: "15px",
+                }}
+              >
+                Home
+              </Typography>
 
               <Typography
                 sx={{
-                  fontSize: "12px",
-                  fontWeight: 400,
-                  color: "#23A6F0",
-                  ml: "5px",
+                  fontSize: "14px",
+                  color: "primary.main",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  mr: "15px",
                 }}
               >
-                1
+                Shop
+              </Typography>
+
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  color: "primary.main",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  mr: "15px",
+                }}
+              >
+                About
+              </Typography>
+
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  color: "primary.main",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  mr: "15px",
+                }}
+              >
+                Blog
+              </Typography>
+
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  color: "primary.main",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  mr: "15px",
+                }}
+              >
+                Contact
+              </Typography>
+
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  color: "primary.main",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  mr: "15px",
+                }}
+              >
+                Pages
+              </Typography>
+            </Box>
+          </Box>
+
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                lg: "flex",
+                xl: "flex",
+              },
+
+              alignItems: "center",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                mr: "30px",
+              }}
+            >
+              <Image src={avatarIcon} alt="avatar" />
+
+              <Typography
+                sx={{
+                  textDecoration: "none",
+                  color: "#23A6F0",
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  ml: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                Login
+              </Typography>
+              <Typography
+                sx={{
+                  textDecoration: "none",
+                  color: "#23A6F0",
+                  fontWeight: 700,
+                  fontSize: "14px",
+                }}
+              >
+                /
+              </Typography>
+
+              <Typography
+                sx={{
+                  textDecoration: "none",
+                  color: "#23A6F0",
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  cursor: "pointer",
+                }}
+              >
+                Register
               </Typography>
             </Box>
 
@@ -242,22 +286,61 @@ export default function Header() {
                 alignItems: "center",
               }}
             >
-              <Image src={WishtlistIcon} alt="searh icon" />
-
-              <Typography
+              <Box
                 sx={{
-                  fontSize: "12px",
-                  fontWeight: 400,
-                  color: "#23A6F0",
-                  ml: "5px",
+                  mr: "30px",
+                  display: "flex",
+                  alignItems: "center",
                 }}
               >
-                {selectWishList.length}
-              </Typography>
+                <Image src={SearchIcon} alt="searh icon" />
+              </Box>
+
+              <Box
+                sx={{
+                  mr: "30px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Image src={StoreIcon} alt="searh icon" />
+
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    fontWeight: 400,
+                    color: "#23A6F0",
+                    ml: "5px",
+                  }}
+                >
+                  {selectCartList.length}
+                </Typography>
+              </Box>
+
+              <Box
+                onClick={handleClick}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Image src={WishtlistIcon} alt="searh icon" />
+
+                <Typography
+                  sx={{
+                    fontSize: "12px",
+                    fontWeight: 400,
+                    color: "#23A6F0",
+                    ml: "5px",
+                  }}
+                >
+                  {selectWishList.length}
+                </Typography>
+              </Box>
             </Box>
           </Box>
-        </Box>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+    </>
   );
 }

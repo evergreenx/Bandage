@@ -34,6 +34,7 @@ import Image from "next/image";
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import MobileNav from "./mobile-nav";
 
 export default function Header() {
   const selectWishList = useSelector(selectWishListCount);
@@ -42,6 +43,8 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState<null>(null);
 
   const [anchorElCart, setAnchorElCart] = React.useState<null>(null);
+
+  const [openMobileNav, setOpenMobileNav] = useState<boolean>(false);
 
   const openWishListPopover = Boolean(anchorEl);
 
@@ -332,6 +335,7 @@ export default function Header() {
       <CartPopup open={openCartPopover} />
 
       <Box
+        component={"header"}
         sx={{
           bgcolor: "#fff",
           height: "138px",
@@ -351,6 +355,7 @@ export default function Header() {
             sx={{
               display: "flex",
               alignItems: "center",
+              width: "100%",
             }}
           >
             <Box>
@@ -380,7 +385,6 @@ export default function Header() {
               >
                 Home
               </Typography>
-
               <Typography
                 sx={{
                   fontSize: "14px",
@@ -392,7 +396,6 @@ export default function Header() {
               >
                 Shop
               </Typography>
-
               <Typography
                 sx={{
                   fontSize: "14px",
@@ -404,7 +407,6 @@ export default function Header() {
               >
                 About
               </Typography>
-
               <Typography
                 sx={{
                   fontSize: "14px",
@@ -416,7 +418,6 @@ export default function Header() {
               >
                 Blog
               </Typography>
-
               <Typography
                 sx={{
                   fontSize: "14px",
@@ -428,7 +429,6 @@ export default function Header() {
               >
                 Contact
               </Typography>
-
               <Typography
                 sx={{
                   fontSize: "14px",
@@ -441,6 +441,32 @@ export default function Header() {
                 Pages
               </Typography>
             </Box>
+          </Box>
+
+          {/* mobile nav control */}
+          <Box
+            onClick={() => setOpenMobileNav(!openMobileNav)}
+            sx={{
+              
+              display: {
+                xs: "flex",
+                lg: "none",
+                xl: "none",
+              },
+            }}
+          >
+            <svg
+              width="24"
+              height="14"
+              viewBox="0 0 24 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.571533 0H23.4287V2.28571H0.571533V0ZM6.28582 5.71429H23.4287V8H6.28582V5.71429ZM13.4287 11.4286H23.4287V13.7143H13.4287V11.4286Z"
+                fill="#737373"
+              />
+            </svg>
           </Box>
 
           <Box
@@ -561,6 +587,8 @@ export default function Header() {
           </Box>
         </Container>
       </Box>
+
+      {openMobileNav && <MobileNav />}
     </>
   );
 }

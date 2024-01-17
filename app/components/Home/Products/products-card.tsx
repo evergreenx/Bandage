@@ -6,6 +6,9 @@ import Link from "next/link";
 import React from "react";
 
 export default function ProductsCard({ data }: { data: Product }) {
+
+  const discountedPrice = data.price * (data.discountPercentage / 100);
+
   return (
     <Link
       href={`/${data.id}`}
@@ -109,7 +112,7 @@ export default function ProductsCard({ data }: { data: Product }) {
                 textAlign: "center",
               }}
             >
-              ${data.discountPercentage}
+              ${discountedPrice.toFixed(2)}
             </Typography>
           </Box>
         </Box>

@@ -39,9 +39,12 @@ export default function ProductInfo({ product }: { product: Product }) {
   };
 
   const handleAddToCart = (product: Product) => {
-    if (!isProductInCart) dispatch(addToCart(product));
+    if (!isProductInCart) {
+
+      dispatch(addToCart(product));
     setOpenCartSnack(true);
   };
+    }
 
   const WishListMessage = () => {
     return (

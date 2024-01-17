@@ -39,7 +39,7 @@ export default function CenteredTabs({ data }: { data: Product }) {
 
   return (
     <Container>
-      <Box sx={{ width: "100%", bgcolor: "background.paper", py: "34px" }}>
+      <Box sx={{ width: "100%", bgcolor: "background.paper", py: "34px" , mt: '81px' }}>
         <Tabs
           sx={{
             borderBottom: "1px solid #ECECEC ",

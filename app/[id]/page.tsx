@@ -73,7 +73,7 @@ export default function page() {
       <Box
         sx={{
           bgcolor: "#FAFAFA",
-          pb: "48px",
+          pb: "144px",
         }}
       >
         <Container>

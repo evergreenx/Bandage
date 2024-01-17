@@ -206,11 +206,18 @@ export default function ProductInfo({ product }: { product: Product }) {
         message={CartListMessage()}
       ></Snackbar>
       <Box>
-        <Image
+        <Box
+
+        component={'img'}
           src={product.thumbnail}
-          objectFit="cover"
+
           alt="thumbnail"
-          className="w-[506px]"
+          sx={{
+            height: 506,
+            width: 450,
+            maxHeight: { xs: 233, md: 450 },
+            maxWidth: { xs: 350, md: 506 },
+          }}
           width={506}
           height={450}
         />

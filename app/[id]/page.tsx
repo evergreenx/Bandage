@@ -18,6 +18,7 @@ import BestSellerProducts from "../components/Home/Products/best-seller";
 import { Product } from "@/types";
 import SponsorContain from "../components/ProductDetails/sponsor-contain";
 import ProductInfo from "../components/ProductDetails/product-info";
+import ProductsCard from "../components/Home/Products/products-card";
 
 export default function page() {
   const { id } = useParams();
@@ -43,8 +44,6 @@ export default function page() {
         <Container>{data && <ProductInfo product={data} />}</Container>
       </Box>
       <Container>
-  
-
         {isLoading && (
           <Stack
             sx={{
@@ -101,7 +100,7 @@ export default function page() {
                   }}
                   xs={12}
                 >
-                  <BestSellerCard data={product} key={product.id} />
+                  <ProductsCard data={product} key={product.id} />
                 </Grid>
               );
             })}

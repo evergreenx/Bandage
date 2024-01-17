@@ -8,26 +8,35 @@ import React from "react";
 export default function ProductsCard({ data }: { data: Product }) {
   return (
     <Link
-     href={`/${data.id}`}
-     
-     
-     style={{
-      textDecoration : 'none'
-     }}
-     >
+      href={`/${data.id}`}
+      style={{
+        textDecoration: "none",
+      }}
+    >
       <Box
         sx={{
-       
-
-          width : {
-
-                
-            xs: '100%', lg: '183px', xl: '183px' 
-            },
+          width: {
+            xs: "100%",
+            lg: "183px",
+            xl: "183px",
+          },
           height: "400px",
         }}
       >
-        <Image src={data.thumbnail} alt="prodct" width={183} height={238} />
+        <Box
+          component={"img"}
+          sx={{
+            width: {
+              xs: "100%",
+              md: 183,
+            },
+            height: 238,
+            maxHeight: { xs: "100%", md: 238 },
+            maxWidth: { xs: "100%", md: 183 },
+          }}
+          src={data.thumbnail}
+          alt="product"
+        />
 
         <Box
           sx={{
@@ -48,7 +57,11 @@ export default function ProductsCard({ data }: { data: Product }) {
               WebkitLineClamp: "2",
               WebkitBoxOrient: "vertical",
               textTransform: "capitalize",
-              width: "131px",
+              width: {
+
+                xs :'100%',
+                md :  "131px"
+              },
               lineClamp: 1,
             }}
           >

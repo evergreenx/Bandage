@@ -22,7 +22,14 @@ import { selectWishListCount } from "@/lib/redux/slices/wishlistSlice/selector";
 import { Product } from "@/types";
 
 import { Instagram } from "@mui/icons-material";
-import { Box, Container, Link, Popper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Link,
+  Popper,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 
 import React, { useState } from "react";
@@ -143,26 +150,30 @@ export default function Header() {
 
     const cartTotal = calculateCartTotal();
 
-    const handleUpdateCartItemQuantity = (
-      product: Product,
-      quantity: number
-    ) => {
-      dispatch(updateCartItemQuantity({ product, quantity }));
+    const handleIncrement = (product: Product, quantity: number) => {
+      const currentQuantity =
+        selectCartList.find((item) => item.product.id === product.id)
+          ?.quantity || 0;
+
+      if (currentQuantity) {
+        const updatedQuantity = quantity + 1;
+        dispatch(
+          updateCartItemQuantity({ product, currentQuantity: updatedQuantity })
+        );
+      }
     };
 
-    const [quantityInput, setQuantityInput] = useState<{
-      [key: number]: number;
-    }>({});
+    const handleDecrement = (product: Product, quantity: number) => {
+      const currentQuantity =
+        selectCartList.find((item) => item.product.id === product.id)
+          ?.quantity || 0;
 
-    const handleInputChange = (productId: number, value: string) => {
-      const newQuantity = parseInt(value, 10) || 0;
-      setQuantityInput((prev) => ({ ...prev, [productId]: newQuantity }));
-    };
-
-    const handleUpdateQuantity = (product: Product) => {
-      const quantity = quantityInput[product.id] || 0;
-      handleUpdateCartItemQuantity(product, quantity);
-      setQuantityInput((prev) => ({ ...prev, [product.id]: 0 }));
+      if (currentQuantity > 0) {
+        const updatedQuantity = currentQuantity - 1;
+        dispatch(
+          updateCartItemQuantity({ product, currentQuantity: updatedQuantity })
+        );
+      }
     };
 
     return (
@@ -219,15 +230,41 @@ export default function Header() {
                     {i.product.title.slice(0, 10)}.....
                   </Typography>
 
-                  <Typography
+                  <Box
                     sx={{
-                      fontSize: "14px",
-                      fontWeight: 600,
-                      ml: "8px",
+                      display: "flex",
+                      alignItems: "center",
                     }}
                   >
-                    {i.quantity}
-                  </Typography>
+                    <Button
+                      sx={{
+                        fontSize: "18px",
+                        fontWeight: 700,
+                      }}
+                      onClick={() => handleIncrement(i.product, i.quantity)}
+                    >
+                      +
+                    </Button>
+                    <Typography
+                      sx={{
+                        fontSize: "14px",
+                        fontWeight: 600,
+                        mx: "8px",
+                      }}
+                    >
+                      {i.quantity}
+                    </Typography>
+
+                    <Button
+                      sx={{
+                        fontSize: "18px",
+                        fontWeight: 700,
+                      }}
+                      onClick={() => handleDecrement(i.product, i.quantity)}
+                    >
+                      -
+                    </Button>
+                  </Box>
 
                   <Box
                     sx={{
@@ -248,17 +285,6 @@ export default function Header() {
                     </svg>
                   </Box>
                 </Box>
-
-                <input
-                  type="number"
-                  value={quantityInput[i.product.id] || ""}
-                  onChange={(e) =>
-                    handleInputChange(i.product.id, e.target.value)
-                  }
-                />
-                <button onClick={() => handleUpdateQuantity(i.product)}>
-                  Update Quantity
-                </button>
               </>
             );
           })}

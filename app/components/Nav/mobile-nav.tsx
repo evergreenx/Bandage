@@ -11,7 +11,7 @@ export default function MobileNav() {
           position: "absolute",
           background :'#fff',
           width :'100%',
-          boxShadow : 3,
+          boxShadow : 1,
 
           display: {
             xs: "flex",

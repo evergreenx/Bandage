@@ -33,3 +33,12 @@ export { default as StripeLogo } from "./svg/stripe.svg";
 export { default as PiedPiperLogo } from "./svg/piedpiper.svg";
 export { default as RedditLogo } from "./svg/reddit.svg";
 export { default as LyftLogo } from "./svg/lyft.svg";
+
+export { default as Hero1 } from "./hero1.png";
+export { default as Hero2 } from "./hero2.png";
+export { default as Hero3 } from "./hero3.png";
+export { default as Hero4 } from "./hero4.png";
+
+
+
+

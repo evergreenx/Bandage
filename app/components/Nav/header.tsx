@@ -82,6 +82,7 @@ export default function Header() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
+                  mb : '10px'
                 }}
               >
                 <Image
@@ -138,7 +139,7 @@ export default function Header() {
 
     const cartTotal = calculateCartTotal();
     return (
-      <Popper id={idCart} open={open} anchorEl={anchorEl}>
+      <Popper id={idCart} open={open} anchorEl={anchorElCart}>
         <Box
           sx={{
             p: 3,
@@ -170,6 +171,7 @@ export default function Header() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
+                  mb : '10px'
                 }}
               >
                 <Image

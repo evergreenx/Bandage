@@ -1,5 +1,6 @@
 import { addToWishlist, useSelector } from "@/lib/redux";
 import { addToCart } from "@/lib/redux/slices/cartSlice";
+import { selectedCart } from "@/lib/redux/slices/cartSlice/selector";
 import { selectWishListCount } from "@/lib/redux/slices/wishlistSlice/selector";
 import { Product, ProductInterface } from "@/types";
 import {
@@ -19,22 +20,25 @@ export default function ProductInfo({ product }: { product: Product }) {
   const [openWishlistSnack, setOpenWishlistSnack] = React.useState(false);
   const [openCartSnack, setOpenCartSnack] = React.useState(false);
 
-
   const wishlistItems = useSelector(selectWishListCount);
+  const selectCartList = useSelector(selectedCart);
 
   const isProductInWishlist = wishlistItems.some(
     (item) => item.id === product.id
   );
 
-  const handleAddToWishlist = (product: any) => {
+  const isProductInCart = selectCartList.some(
+    (item) => item.product.id === product.id
+  );
+  const handleAddToWishlist = (product: Product) => {
     if (!isProductInWishlist) {
       dispatch(addToWishlist(product));
       setOpenWishlistSnack(true);
     }
   };
 
-  const handleAddToCart = (product: any) => {
-    dispatch(addToCart(product));
+  const handleAddToCart = (product: Product) => {
+    if (!isProductInCart) dispatch(addToCart(product));
     setOpenCartSnack(true);
   };
 
@@ -204,9 +208,7 @@ export default function ProductInfo({ product }: { product: Product }) {
       <Box>
         <Image
           src={product.thumbnail}
-
           objectFit="cover"
-     
           alt="thumbnail"
           className="w-[506px]"
           width={506}
@@ -401,7 +403,7 @@ export default function ProductInfo({ product }: { product: Product }) {
               bgcolor: "#E8E8E8",
               borderRadius: "100px",
               mr: "10px",
-              cursor: "pointer",
+              cursor: isProductInCart ? "not-allowed" : "pointer",
             }}
           >
             <svg

@@ -193,7 +193,7 @@ Designer
             <img
               srcSet={`${item.img}?w=142&h=142&fit=crop&auto=format&dpr=2 2x`}
               src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-              alt={item.title}
+              alt={'list'}
               loading="lazy"
             />
           </ImageListItem>

@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import React from "react";
 import { useDispatch } from "react-redux";
+import StarRating from "./star-rating";
 
 export default function ProductInfo({ product }: { product: Product }) {
   const dispatch = useDispatch();
@@ -207,10 +208,8 @@ export default function ProductInfo({ product }: { product: Product }) {
       ></Snackbar>
       <Box>
         <Box
-
-        component={'img'}
+          component={"img"}
           src={product.thumbnail}
-
           alt="thumbnail"
           sx={{
             height: 506,
@@ -239,7 +238,12 @@ export default function ProductInfo({ product }: { product: Product }) {
           {product.title}
         </Typography>
 
-        <Box></Box>
+        <Box>
+
+
+<StarRating rating={product.rating} />
+
+        </Box>
 
         <Typography
           sx={{

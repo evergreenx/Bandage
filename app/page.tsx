@@ -1,6 +1,6 @@
 "use client";
 import { Container, Typography } from "@mui/material";
-import { Counter } from "./components/Counter/Counter";
+
 
 import Button from "@mui/material/Button";
 import FooterCta from "./components/Home/footer-cta";

@@ -11,7 +11,7 @@ const initialState: WishlistState = {
 };
 
 // Load wishlist state from localStorage
-const storedWishlistState = localStorage.getItem("wishlistState");
+const storedWishlistState = typeof localStorage !== 'undefined' ? localStorage.getItem("wishlistState") : null;
 const persistedWishlistInitialState: WishlistState = storedWishlistState
   ? JSON.parse(storedWishlistState)
   : initialState;
@@ -28,14 +28,18 @@ export const wishlistSlice = createSlice({
         state.items.push(action.payload);
 
         // Update localStorage
-        localStorage.setItem("wishlistState", JSON.stringify(state));
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem("wishlistState", JSON.stringify(state));
+        }
       }
     },
     removeFromWishlist: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
 
       // Update localStorage
-      localStorage.setItem("wishlistState", JSON.stringify(state));
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem("wishlistState", JSON.stringify(state));
+      }
     },
   },
 });

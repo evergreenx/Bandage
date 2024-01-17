@@ -11,7 +11,7 @@ const initialState: CartState = {
 };
 
 // Load cart state from localStorage
-const storedCartState = localStorage.getItem("cartState");
+const storedCartState = typeof localStorage !== 'undefined' ? localStorage.getItem("cartState") : null;
 const persistedInitialState: CartState = storedCartState
   ? JSON.parse(storedCartState)
   : initialState;
@@ -32,7 +32,9 @@ const cartSlice = createSlice({
       }
 
       // Update localStorage
-      localStorage.setItem("cartState", JSON.stringify(state));
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem("cartState", JSON.stringify(state));
+      }
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter(
@@ -40,7 +42,9 @@ const cartSlice = createSlice({
       );
 
       // Update localStorage
-      localStorage.setItem("cartState", JSON.stringify(state));
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem("cartState", JSON.stringify(state));
+      }
     },
     updateCartItemQuantity: (state, action: PayloadAction<{ product: Product; currentQuantity: number }>) => {
       const { product, currentQuantity } = action.payload;
@@ -53,7 +57,9 @@ const cartSlice = createSlice({
       }
 
       // Update localStorage
-      localStorage.setItem("cartState", JSON.stringify(state));
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem("cartState", JSON.stringify(state));
+      }
     },
   },
 });

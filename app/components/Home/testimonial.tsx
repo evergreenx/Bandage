@@ -18,13 +18,24 @@ export default function StandardImageList() {
         },
       }}
     >
-      <Box>
+      <Box
+      
+      
+      sx={{
+        width: {
+
+            xs: '100%',
+            lg: ' 438px'
+        }
+      }}
+      >
         <Typography
           sx={{
             fontSize: "24px",
             color: "primary.dark",
             fontWeight: 700,
             mb: "28px",
+            textAlign: 'center'
           }}
         >
           What they say about us
